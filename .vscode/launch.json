@@ -7,13 +7,14 @@
       {
         "name": "C/C++: clang++ build and debug active file",
         "type": "cppdbg",
+        "targetArchitecture": "arm64",
         "request": "launch",
         "program": "${workspaceFolder}/a.out",
-        "args": [],
+        "args": ["mac.local", "20001"],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],
-        "externalConsole": false,
+        "externalConsole": true,
         "MIMode": "lldb",
         "preLaunchTask": "C/C++: clang++ build active file"
       }
