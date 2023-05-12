@@ -1,73 +1,13 @@
-// modified source from https://www.bogotobogo.com/cplusplus/sockets_server_client.php
-
+// note in launch.json, I have turned on externalConsole to true.
+// otherwise debug output gets mixed up with app output
+// and console based text input does not work well
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-
-void error(const char *msg)
-{
-    perror(msg);
-    exit(0);
-}
 
 int main(int argc, char *argv[])
 {
-    int sockfd, portno, n;
-    struct sockaddr_in serv_addr;
-    struct hostent *server;
-
-    char buffer[256];
-    if (argc < 3) {
-       fprintf(stderr,"usage %s hostname port\n", argv[0]);
-       exit(0);
-    }
-
-    printf("Client connecting...");
-
-    portno = atoi(argv[2]);
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd < 0) 
-        error("ERROR opening socket");
     
-    // get the destination server
-    server = gethostbyname(argv[1]);
+    printf("Test output\n ");
     
-    if (server == NULL) {
-        fprintf(stderr,"ERROR, no such host\n");
-        exit(0);
-    }
-    
-    bzero((char *) &serv_addr, sizeof(serv_addr));
-    serv_addr.sin_family = AF_INET;
-
-    bcopy((char *)server->h_addr, 
-         (char *)&serv_addr.sin_addr.s_addr,
-         server->h_length);
-    
-    serv_addr.sin_port = htons(portno);
-    
-    if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) 
-        error("ERROR connecting");
-    
-    printf("Please enter the message: ");
-    
-    bzero(buffer,256);
-    fgets(buffer,255,stdin);
-    n = write(sockfd, buffer, strlen(buffer));
-    if (n < 0) 
-         error("ERROR writing to socket");
-    
-    bzero(buffer,256);
-    n = read(sockfd, buffer, 255);
-    if (n < 0) 
-         error("ERROR reading from socket");
-    printf("%s\n", buffer);
-    close(sockfd);
     getc(stdin);
     
     return 0;
