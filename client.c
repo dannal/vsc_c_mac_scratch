@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     
-    printf("Test output\n");
+    printf("Test output \n");
     
     getc(stdin);
     
